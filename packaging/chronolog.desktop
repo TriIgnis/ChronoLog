@@ -1,0 +1,16 @@
+[Desktop Entry]
+Type=Application
+Version=0.1.0
+Name=ChronoLog
+GenericName=Markdown 时间线日志
+Comment=Ubuntu 科研与学习 Markdown 时间线日志软件
+Exec=chronolog
+Icon=chronolog
+Terminal=false
+Categories=Office;Utility;
+Keywords=journal;markdown;diary;timeline;log;日志;日记;
+StartupWMClass=chronolog
+
+[Desktop Action Quick]
+Name=快速记录
+Exec=chronolog --quick

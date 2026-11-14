@@ -1,0 +1,128 @@
+/* ChronoLog 浅色主题 */
+
+QWidget {
+    background-color: #f5f6f8;
+    color: #1f2430;
+    font-size: 13px;
+}
+
+QMainWindow, QDialog {
+    background-color: #f5f6f8;
+}
+
+QLineEdit, QPlainTextEdit, QTextEdit, QDateTimeEdit, QComboBox, QSpinBox {
+    background-color: #ffffff;
+    color: #1f2430;
+    border: 1px solid #c8ccd4;
+    border-radius: 6px;
+    padding: 6px 8px;
+    selection-background-color: #2f7da5;
+    selection-color: #ffffff;
+}
+
+QLineEdit:focus, QPlainTextEdit:focus, QTextEdit:focus {
+    border: 1px solid #2f7da5;
+}
+
+QPushButton {
+    background-color: #ffffff;
+    color: #1f2430;
+    border: 1px solid #c8ccd4;
+    border-radius: 6px;
+    padding: 6px 14px;
+}
+
+QPushButton:hover {
+    background-color: #eef3f7;
+    border-color: #2f7da5;
+}
+
+QPushButton:pressed {
+    background-color: #dde7ee;
+}
+
+QPushButton#primary {
+    background-color: #2f7da5;
+    color: #ffffff;
+    border: none;
+}
+
+QPushButton#primary:hover {
+    background-color: #3b8db8;
+}
+
+QPushButton#danger {
+    background-color: #ffffff;
+    color: #b0433a;
+    border: 1px solid #e0b4af;
+}
+
+QPushButton#danger:hover {
+    background-color: #fbeae8;
+}
+
+QFrame#card {
+    background-color: #ffffff;
+    border: 1px solid #e2e5ea;
+    border-radius: 8px;
+}
+
+QLabel#muted {
+    color: #6b7280;
+}
+
+QLabel#timeBadge {
+    color: #2f7da5;
+    font-weight: 600;
+}
+
+QLabel#titleLabel {
+    font-weight: 700;
+    font-size: 14px;
+}
+
+QLabel#bigDate {
+    font-size: 18px;
+    font-weight: 700;
+}
+
+QLabel#bigTime {
+    font-size: 22px;
+    font-weight: 700;
+    color: #2f7da5;
+}
+
+QCalendarWidget QWidget#qt_calendar_navigationbar {
+    background-color: #ffffff;
+}
+
+QCalendarWidget QToolButton {
+    background-color: transparent;
+    color: #1f2430;
+    border: none;
+    padding: 6px;
+}
+
+QCalendarWidget QAbstractItemView {
+    background-color: #ffffff;
+    color: #1f2430;
+    selection-background-color: #2f7da5;
+    selection-color: #ffffff;
+}
+
+QScrollArea {
+    border: none;
+    background-color: transparent;
+}
+
+QTextBrowser {
+    background-color: #ffffff;
+    border: 1px solid #c8ccd4;
+    border-radius: 6px;
+    padding: 6px;
+}
+
+QStatusBar {
+    background-color: #f5f6f8;
+    color: #6b7280;
+}
