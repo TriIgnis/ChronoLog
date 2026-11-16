@@ -88,6 +88,7 @@ class MainWindow(QMainWindow):
     """ChronoLog 主窗口。"""
 
     quick_capture_requested = Signal()
+    floating_preference_changed = Signal(bool)
 
     def __init__(self, storage: Storage, config: Config) -> None:
         super().__init__()
@@ -333,6 +334,9 @@ class MainWindow(QMainWindow):
         self.timeline.scroll_to(result.entry.uuid)
 
     # ------------------------------------------------------------ 设置
+    def open_settings(self) -> None:
+        self._on_settings()
+
     def _on_settings(self) -> None:
         dlg = SettingsDialog(self.config, self)
         dlg.theme_changed.connect(lambda theme: apply_theme(QApplication.instance(), theme))
@@ -340,6 +344,7 @@ class MainWindow(QMainWindow):
             self.storage.set_root(self.config.settings.log_root_dir)
             self._reload()
             self._refresh_calendar_marks()
+            self.floating_preference_changed.emit(self.config.settings.show_floating_window)
 
     def refresh_after_quick_save(self) -> None:
         """快速记录保存后刷新当前视图。"""

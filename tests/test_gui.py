@@ -159,3 +159,38 @@ def _entry(title: str, body: str, d: date) -> object:
     from chronolog.core.models import LogEntry
 
     return LogEntry.new(datetime(d.year, d.month, d.day, 12, 0, 0), title=title, body=body)
+
+
+def test_floating_button_position_persistence(qapp, env):
+    from chronolog.ui.floating import FloatingButton
+
+    cfg, storage = env
+    fb = FloatingButton(cfg)
+    assert fb.width() == 56 and fb.height() == 56
+    # 默认位置应在屏幕内
+    assert fb.x() >= 0 and fb.y() >= 0
+    # 记录位置后，新实例应恢复
+    cfg.settings.floating_pos_x = 300
+    cfg.settings.floating_pos_y = 400
+    fb2 = FloatingButton(cfg)
+    assert (fb2.x(), fb2.y()) == (300, 400)
+
+
+def test_floating_button_click_signal(qapp, env):
+    from chronolog.ui.floating import FloatingButton
+
+    cfg, storage = env
+    fb = FloatingButton(cfg)
+    received = []
+    fb.quick_capture_requested.connect(lambda: received.append(1))
+    fb.quick_capture_requested.emit()
+    assert received == [1]
+
+
+def test_config_floating_fields(qapp, env):
+    cfg, storage = env
+    assert cfg.settings.show_floating_window is True
+    cfg.settings.show_floating_window = False
+    cfg.save()
+    cfg2 = Config()
+    assert cfg2.settings.show_floating_window is False

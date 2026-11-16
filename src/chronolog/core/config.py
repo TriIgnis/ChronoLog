@@ -42,6 +42,9 @@ class Settings:
     editor_font_size: int = 12
     auto_close_after_save: bool = True
     startup_behavior: str = "main"  # "main" | "quick" | "last"
+    show_floating_window: bool = True  # 是否显示悬浮球
+    floating_pos_x: int = -1  # 悬浮球位置（-1 表示默认）
+    floating_pos_y: int = -1
 
 
 class Config:

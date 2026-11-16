@@ -23,6 +23,7 @@ from chronolog.core.storage import Storage
 from chronolog.paths import APP_ICON
 from chronolog.ui.main_window import MainWindow
 from chronolog.ui.quick_capture import QuickCaptureWindow
+from chronolog.ui.floating import FloatingButton
 from chronolog.ui.theme import apply_theme
 
 SOCKET_KEY = "chronolog-single-instance"
@@ -114,6 +115,7 @@ def main(argv: list[str] | None = None) -> int:
     storage = Storage(config.settings.log_root_dir)
     window = MainWindow(storage, config)
     quick = QuickCaptureWindow(storage, config)
+    floating = FloatingButton(config)
 
     def handle_message(message: str) -> None:
         if message == "quick":
@@ -136,11 +138,21 @@ def main(argv: list[str] | None = None) -> int:
         lambda: handle_message("quick")
     )
 
+    # 悬浮球
+    floating.quick_capture_requested.connect(lambda: handle_message("quick"))
+    floating.main_window_requested.connect(lambda: handle_message("show"))
+    floating.settings_requested.connect(window.open_settings)
+    floating.quit_requested.connect(app.quit)
+    window.floating_preference_changed.connect(floating.setVisible)
+
     def on_quick_closed() -> None:
-        if not window.isVisible():
+        if not window.isVisible() and not floating.isVisible():
             app.quit()
 
     quick.closed.connect(on_quick_closed)
+
+    if config.settings.show_floating_window:
+        floating.show()
 
     if args.quick:
         quick.center_on_screen()

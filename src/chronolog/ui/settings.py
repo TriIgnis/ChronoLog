@@ -25,7 +25,7 @@ class SettingsDialog(QDialog):
     def __init__(self, config: Config, parent=None) -> None:
         super().__init__(parent)
         self.setWindowTitle("设置")
-        self.resize(520, 320)
+        self.resize(520, 380)
         self._config = config
         s = config.settings
 
@@ -49,6 +49,9 @@ class SettingsDialog(QDialog):
         self.auto_close = QCheckBox("保存后自动关闭快速记录窗口")
         self.auto_close.setChecked(s.auto_close_after_save)
 
+        self.show_floating = QCheckBox("显示悬浮球（置顶，一键快速记录）")
+        self.show_floating.setChecked(s.show_floating_window)
+
         self.startup_combo = QComboBox()
         self.startup_combo.addItem("主窗口", "main")
         self.startup_combo.addItem("快速记录", "quick")
@@ -61,6 +64,7 @@ class SettingsDialog(QDialog):
         form.addRow("主题", self.theme_combo)
         form.addRow("编辑器字号", self.font_spin)
         form.addRow("", self.auto_close)
+        form.addRow("", self.show_floating)
         form.addRow("启动行为", self.startup_combo)
 
         cancel_btn = QPushButton("取消")
@@ -91,6 +95,7 @@ class SettingsDialog(QDialog):
         s.theme = self.theme_combo.currentData()
         s.editor_font_size = self.font_spin.value()
         s.auto_close_after_save = self.auto_close.isChecked()
+        s.show_floating_window = self.show_floating.isChecked()
         s.startup_behavior = self.startup_combo.currentData()
         try:
             self._config.save()
